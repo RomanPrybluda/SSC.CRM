@@ -16,7 +16,7 @@
 
         public ICollection<ContactPerson> ContactPersons { get; set; }
 
-        //public ICollection<Contract> Contracts { get; set; }
+        public ICollection<Contract> Contracts { get; set; }
 
         public ICollection<Order> Orders { get; set; }
 
@@ -24,6 +24,6 @@
 
         public ICollection<Ship> Ships { get; set; }
 
-        //public ICollection<Invoice> Invoices { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
     }
 }

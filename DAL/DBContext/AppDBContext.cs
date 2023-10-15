@@ -19,7 +19,7 @@ namespace DAL.DBContext
 
         public DbSet<ContactPerson> ContactPersons { get; set; }
 
-        //public DbSet<Contract> Contracts { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 
@@ -36,7 +36,7 @@ namespace DAL.DBContext
 
             new ContactPersonConfiguration().Configure(modelBuilder.Entity<ContactPerson>());
 
-            // new ContractConfiguration().Configure(modelBuilder.Entity<Contract>());
+            new ContractConfiguration().Configure(modelBuilder.Entity<Contract>());
 
             new OrderConfiguration().Configure(modelBuilder.Entity<Order>());
 

@@ -19,8 +19,8 @@ namespace DAL.DBContext.EntityConfigurations
             builder.Property(order => order.WorkOrderDescription)
                     .IsRequired();
 
-            builder.Property(order => order.ClientId)
-                    .IsRequired();
+            //builder.Property(order => order.ClientId)
+            //        .IsRequired();
         }
     }
 }
