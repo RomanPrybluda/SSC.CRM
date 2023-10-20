@@ -1,4 +1,5 @@
-﻿using Domain.Services.OrderService;
+﻿using DAL.Constant;
+using Domain.Services.OrderService;
 using Domain.Services.ServicesOrder.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,10 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("orders")]
-    [AllowAnonymous]
+    [Authorize(Roles.SUPER_ADMIN)]
+    [Authorize(Roles.DIRECTOR)]
+    [Authorize(Roles.MANAGER)]
+
     public class OrderController : ControllerBase
     {
         private readonly OrderService _orderService;
@@ -30,7 +34,8 @@ namespace WebAPI.Controllers
             return Ok(orders);
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetOrderResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -50,7 +55,8 @@ namespace WebAPI.Controllers
             return Ok(order);
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateOrderResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -60,7 +66,8 @@ namespace WebAPI.Controllers
             return Ok(order);
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]

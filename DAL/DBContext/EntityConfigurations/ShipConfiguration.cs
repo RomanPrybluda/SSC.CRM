@@ -10,6 +10,11 @@ namespace DAL.DBContext.EntityConfigurations
         {
             builder.HasKey(ship => ship.ShipId);
 
+            builder.HasMany(ship => ship.Documents)
+                    .WithOne(doc => doc.Ship)
+                    .HasForeignKey(doc => doc.ShipId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
             builder.Property(ship => ship.ShipId)
                     .HasDefaultValueSql("NEWID()");
 

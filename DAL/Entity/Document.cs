@@ -28,6 +28,10 @@ namespace DAL.Entity
 
         public DateTime SentDate { get; set; }
 
+        public Guid OrderId { get; set; }
+
+        public Order Order { get; set; }
+
         public Guid ShipId { get; set; }
 
         public Ship Ship { get; set; }

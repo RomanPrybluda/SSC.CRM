@@ -1,4 +1,5 @@
-﻿using Domain.Services.AppUserService;
+﻿using DAL.Constant;
+using Domain.Services.AppUserService;
 using Domain.Services.AppUserService.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,10 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("appusers")]
-    [AllowAnonymous]
+    [Authorize(Roles.SUPER_ADMIN)]
+    [Authorize(Roles.DIRECTOR)]
+    [Authorize(Roles.MANAGER)]
+
     public class AppUserController : ControllerBase
     {
         private readonly AppUserService _appUserService;
@@ -30,7 +34,8 @@ namespace WebAPI.Controllers
             return Ok(appUsers);
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetAppUserResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -50,7 +55,8 @@ namespace WebAPI.Controllers
             return Ok(appUser);
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateAppUserResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -60,7 +66,8 @@ namespace WebAPI.Controllers
             return Ok(appUser);
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]

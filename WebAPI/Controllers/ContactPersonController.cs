@@ -1,4 +1,5 @@
-﻿using Domain.Services.ContactPersonService;
+﻿using DAL.Constant;
+using Domain.Services.ContactPersonService;
 using Domain.Services.ContactPersonService.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,10 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("contactpersons")]
-    [AllowAnonymous]
+    [Authorize(Roles.SUPER_ADMIN)]
+    [Authorize(Roles.DIRECTOR)]
+    [Authorize(Roles.MANAGER)]
+
     public class ContactPersonController : ControllerBase
     {
         private readonly ContactPersonService _contactPersonService;
@@ -30,7 +34,8 @@ namespace WebAPI.Controllers
             return Ok(contactPersons);
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetContactPersonResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -60,7 +65,8 @@ namespace WebAPI.Controllers
             return Ok(contactPerson);
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]

@@ -3,14 +3,14 @@ using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.ConfigureServices();
-
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
 builder.Services.AddEndpointsApiExplorer();
+
+builder.ConfigureServices();
 
 var app = builder.Build();
 
@@ -26,5 +26,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.RegisterMiddleware();
+
+app.InitializeSeeds();
 
 app.Run();

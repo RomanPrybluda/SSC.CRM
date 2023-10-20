@@ -30,5 +30,9 @@ namespace DAL.Entity
 
         public ICollection<Document> Documents { get; set; }
 
+        //public Guid DocumentId { get; set; }
+
+        //public Document Document { get; set; }
+
     }
 }

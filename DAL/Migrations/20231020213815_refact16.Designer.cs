@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20231015201322_addContract")]
-    partial class addContract
+    [Migration("20231020213815_refact16")]
+    partial class refact16
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,7 +178,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ContactPersons");
+                    b.ToTable("Contact Person", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Entity.Contract", b =>
@@ -212,14 +212,11 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18, 2)");
-
                     b.HasKey("ContractId");
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Contracts");
+                    b.ToTable("Contract", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Entity.Document", b =>
@@ -234,9 +231,6 @@ namespace DAL.Migrations
 
                     b.Property<string>("Checker")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ClientId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -258,7 +252,7 @@ namespace DAL.Migrations
                     b.Property<int>("DocumentStatus")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("OrderId")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("SentDate")
@@ -276,13 +270,41 @@ namespace DAL.Migrations
 
                     b.HasKey("DocumentId");
 
-                    b.HasIndex("ClientId");
-
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ShipId");
 
                     b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("DAL.Entity.Invoice", b =>
+                {
+                    b.Property<Guid>("InvoiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<Guid>("ContractId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InvoiceNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvoiceStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("InvoiceId");
+
+                    b.HasIndex("ContractId");
+
+                    b.ToTable("Invoices", (string)null);
                 });
 
             modelBuilder.Entity("DAL.Entity.Order", b =>
@@ -300,9 +322,6 @@ namespace DAL.Migrations
 
                     b.Property<bool>("CheckersAreAssigned")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ContractId")
                         .HasColumnType("uniqueidentifier");
@@ -335,8 +354,6 @@ namespace DAL.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("ClientId");
-
                     b.HasIndex("ContractId");
 
                     b.ToTable("Orders");
@@ -351,9 +368,6 @@ namespace DAL.Migrations
 
                     b.Property<int>("ClassSociety")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("ClientId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Dwt")
                         .HasColumnType("float");
@@ -390,8 +404,6 @@ namespace DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ShipId");
-
-                    b.HasIndex("ClientId");
 
                     b.ToTable("Ships");
                 });
@@ -553,47 +565,43 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entity.Document", b =>
                 {
-                    b.HasOne("DAL.Entity.Client", null)
+                    b.HasOne("DAL.Entity.Order", "Order")
                         .WithMany("Documents")
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("DAL.Entity.Order", null)
-                        .WithMany("Documents")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DAL.Entity.Ship", "Ship")
                         .WithMany("Documents")
                         .HasForeignKey("ShipId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Order");
 
                     b.Navigation("Ship");
                 });
 
-            modelBuilder.Entity("DAL.Entity.Order", b =>
+            modelBuilder.Entity("DAL.Entity.Invoice", b =>
                 {
-                    b.HasOne("DAL.Entity.Client", "Client")
-                        .WithMany("Orders")
-                        .HasForeignKey("ClientId")
+                    b.HasOne("DAL.Entity.Contract", "Contract")
+                        .WithMany("Invoices")
+                        .HasForeignKey("ContractId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Contract");
+                });
+
+            modelBuilder.Entity("DAL.Entity.Order", b =>
+                {
                     b.HasOne("DAL.Entity.Contract", "Contract")
                         .WithMany("Orders")
                         .HasForeignKey("ContractId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
-
                     b.Navigation("Contract");
-                });
-
-            modelBuilder.Entity("DAL.Entity.Ship", b =>
-                {
-                    b.HasOne("DAL.Entity.Client", null)
-                        .WithMany("Ships")
-                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -652,16 +660,12 @@ namespace DAL.Migrations
                     b.Navigation("ContactPersons");
 
                     b.Navigation("Contracts");
-
-                    b.Navigation("Documents");
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("Ships");
                 });
 
             modelBuilder.Entity("DAL.Entity.Contract", b =>
                 {
+                    b.Navigation("Invoices");
+
                     b.Navigation("Orders");
                 });
 

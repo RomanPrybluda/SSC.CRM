@@ -1,4 +1,5 @@
-﻿using Domain.Services.DocumentService;
+﻿using DAL.Constant;
+using Domain.Services.DocumentService;
 using Domain.Services.DocumentService.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,11 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("documents")]
-    [AllowAnonymous]
+    [Authorize(Roles.SUPER_ADMIN)]
+    [Authorize(Roles.DIRECTOR)]
+    [Authorize(Roles.MANAGER)]
+    [Authorize(Roles.SENIOR_SURVEYOR)]
+
     public class DocumentController : ControllerBase
     {
         private readonly DocumentService _documentService;
@@ -30,7 +35,8 @@ namespace WebAPI.Controllers
             return Ok(documents);
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetDocumentResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -50,7 +56,8 @@ namespace WebAPI.Controllers
             return Ok(document);
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateDocumentResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -60,7 +67,8 @@ namespace WebAPI.Controllers
             return Ok(document);
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]

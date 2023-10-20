@@ -8,6 +8,8 @@ namespace DAL.DBContext.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ContactPerson> builder)
         {
+            builder.ToTable("Contact Person");
+
             builder.HasKey(contactPerson => contactPerson.ContactPersonId);
 
             builder.Property(contactPerson => contactPerson.ContactPersonId)

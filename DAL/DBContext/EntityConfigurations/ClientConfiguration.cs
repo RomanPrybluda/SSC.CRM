@@ -10,6 +10,14 @@ namespace DAL.DBContext.EntityConfigurations
         {
             builder.HasKey(client => client.ClientId);
 
+            builder.HasMany(c => c.ContactPersons)
+                    .WithOne(cp => cp.Client)
+                    .HasForeignKey(cp => cp.ClientId);
+
+            builder.HasMany(c => c.Contracts)
+                    .WithOne(contract => contract.Client)
+                    .HasForeignKey(cp => cp.ClientId);
+
             builder.Property(client => client.ClientId)
                     .HasDefaultValueSql("NEWID()");
 

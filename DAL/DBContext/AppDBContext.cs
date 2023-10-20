@@ -27,7 +27,7 @@ namespace DAL.DBContext
 
         public DbSet<Ship> Ships { get; set; }
 
-        //public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,7 +44,7 @@ namespace DAL.DBContext
 
             new ShipConfiguration().Configure(modelBuilder.Entity<Ship>());
 
-            //new InvoiceConfiguration().Configure(modelBuilder.Entity<Invoice>());
+            new InvoiceConfiguration().Configure(modelBuilder.Entity<Invoice>());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -8,7 +8,17 @@ namespace DAL.DBContext.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Contract> builder)
         {
+            builder.ToTable("Contract");
+
             builder.HasKey(contract => contract.ContractId);
+
+            builder.HasMany(contract => contract.Orders)
+                    .WithOne(order => order.Contract)
+                    .HasForeignKey(order => order.ContractId);
+
+            builder.HasMany(contract => contract.Invoices)
+                    .WithOne(invoice => invoice.Contract)
+                    .HasForeignKey(invoice => invoice.ContractId);
 
             builder.Property(contract => contract.ContractId)
                     .HasDefaultValueSql("NEWID()");
@@ -21,10 +31,6 @@ namespace DAL.DBContext.EntityConfigurations
 
             builder.Property(contract => contract.Description)
                     .IsRequired();
-
-            builder.Property(contract => contract.TotalAmount)
-                    .IsRequired()
-                    .HasColumnType("decimal(18, 2)");
         }
     }
 }

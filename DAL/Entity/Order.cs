@@ -14,10 +14,6 @@ namespace DAL.Entity
 
         public OrderStatus OrderStatus { get; set; }
 
-        public Guid ClientId { get; set; }
-
-        public Client Client { get; set; }
-
         public Guid ContractId { get; set; }
 
         public Contract Contract { get; set; }

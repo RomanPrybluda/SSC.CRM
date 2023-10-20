@@ -10,6 +10,10 @@ namespace DAL.DBContext.EntityConfigurations
         {
             builder.HasKey(order => order.OrderId);
 
+            builder.HasMany(order => order.Documents)
+                    .WithOne(doc => doc.Order)
+                    .HasForeignKey(doc => doc.OrderId);
+
             builder.Property(order => order.OrderId)
                     .HasDefaultValueSql("NEWID()");
 
@@ -18,9 +22,6 @@ namespace DAL.DBContext.EntityConfigurations
 
             builder.Property(order => order.WorkOrderDescription)
                     .IsRequired();
-
-            //builder.Property(order => order.ClientId)
-            //        .IsRequired();
         }
     }
 }

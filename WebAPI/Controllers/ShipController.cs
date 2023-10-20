@@ -1,4 +1,5 @@
-﻿using Domain.Services.ShipService;
+﻿using DAL.Constant;
+using Domain.Services.ShipService;
 using Domain.Services.ShipService.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,11 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("ships")]
-    [AllowAnonymous]
+    [Authorize(Roles.SUPER_ADMIN)]
+    [Authorize(Roles.DIRECTOR)]
+    [Authorize(Roles.MANAGER)]
+    [Authorize(Roles.SENIOR_SURVEYOR)]
+    [Authorize(Roles.MIDDLE_SURVEYOR)]
 
     public class ShipController : ControllerBase
     {
@@ -31,7 +36,8 @@ namespace WebAPI.Controllers
             return Ok(ships);
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetShipResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -51,7 +57,8 @@ namespace WebAPI.Controllers
             return Ok(ship);
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateShipResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -61,7 +68,8 @@ namespace WebAPI.Controllers
             return Ok(ship);
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]

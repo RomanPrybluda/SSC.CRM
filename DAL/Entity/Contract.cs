@@ -14,8 +14,6 @@ namespace DAL.Entity
 
         public DateTime EndDate { get; set; }
 
-        public decimal TotalAmount { get; set; }
-
         public string? Description { get; set; }
 
         public ContractStatus ContractStatus { get; set; }

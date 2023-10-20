@@ -10,13 +10,9 @@ namespace DAL.Entity
 
         public DateTime InvoiceDate { get; set; }
 
-        public decimal TotalAmount { get; set; }
+        public decimal Amount { get; set; }
 
         public InvoiceStatus InvoiceStatus { get; set; }
-
-        public Guid ClientId { get; set; }
-
-        public Client Client { get; set; }
 
         public Guid ContractId { get; set; }
 

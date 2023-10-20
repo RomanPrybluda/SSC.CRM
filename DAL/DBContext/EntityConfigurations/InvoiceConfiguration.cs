@@ -8,11 +8,9 @@ namespace DAL.DBContext.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Invoice> builder)
         {
-            builder.HasKey(invoice => invoice.InvoiceId);
+            builder.ToTable("Invoices");
 
-            builder.HasOne(invoice => invoice.Client)
-                .WithMany(client => client.Invoices)
-                .HasForeignKey(invoice => invoice.ClientId);
+            builder.HasKey(invoice => invoice.InvoiceId);
 
             builder.Property(invoice => invoice.InvoiceId)
                     .HasDefaultValueSql("NEWID()");
@@ -20,12 +18,9 @@ namespace DAL.DBContext.EntityConfigurations
             builder.Property(invoice => invoice.InvoiceNumber)
                     .IsRequired();
 
-            builder.Property(invoice => invoice.TotalAmount)
+            builder.Property(invoice => invoice.Amount)
+                    .HasColumnType("decimal(18, 2)")
                     .IsRequired();
-
-            builder.Property(invoice => invoice.TotalAmount)
-                    .IsRequired()
-                    .HasColumnType("decimal(18, 2)");
         }
     }
 }

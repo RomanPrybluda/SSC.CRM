@@ -1,4 +1,5 @@
-﻿using Domain.Services.InvoiceService;
+﻿using DAL.Constant;
+using Domain.Services.InvoiceService;
 using Domain.Services.InvoiceServices.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,11 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("invoices")]
-    [AllowAnonymous]
+    [Authorize(Roles.SUPER_ADMIN)]
+    [Authorize(Roles.DIRECTOR)]
+    [Authorize(Roles.MANAGER)]
+    [Authorize(Roles.ACCOUNTANT)]
+
     public class InvoiceController : ControllerBase
     {
         private readonly InvoiceService _invoiceService;
@@ -30,7 +35,8 @@ namespace WebAPI.Controllers
             return Ok(invoices);
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetInvoiceResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -50,7 +56,8 @@ namespace WebAPI.Controllers
             return Ok(invoice);
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateInvoiceResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
@@ -60,7 +67,8 @@ namespace WebAPI.Controllers
             return Ok(invoice);
         }
 
-        [HttpDelete("{id:Guid}")]
+        [HttpDelete]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status204NoContent)]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]

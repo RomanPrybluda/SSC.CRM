@@ -1,24 +1,20 @@
-﻿using DAL.Enum;
+﻿using DAL.Constant;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Seeds
 {
     public class RoleInitializer
     {
-
         public static async Task InitializeRole(RoleManager<IdentityRole> roleManager)
         {
-            var roles = Enum.GetNames(typeof(Role));
-
-            foreach (var roleName in roles)
+            foreach (var roleName in typeof(Roles).GetFields())
             {
-                if (!await roleManager.RoleExistsAsync(roleName))
+                if (!await roleManager.RoleExistsAsync(roleName.Name))
                 {
-                    var role = new IdentityRole { Name = roleName };
+                    var role = new IdentityRole { Name = roleName.Name };
                     await roleManager.CreateAsync(role);
                 }
             }
-
         }
     }
 }

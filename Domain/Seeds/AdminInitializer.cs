@@ -1,5 +1,5 @@
-﻿using DAL.Entity;
-using DAL.Enum;
+﻿using DAL.Constant;
+using DAL.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
@@ -31,7 +31,7 @@ namespace Domain.Seeds
                     throw new Exception(result.Errors?.FirstOrDefault()?.Description);
                 }
 
-                result = await userManager.AddToRoleAsync(admin, Role.SuperAdmin.ToString());
+                result = await userManager.AddToRoleAsync(admin, Roles.SUPER_ADMIN);
 
                 if (!result.Succeeded)
                 {

@@ -25,8 +25,9 @@ namespace WebAPI
         public static void ConfigureServices(this WebApplicationBuilder builder)
         {
             ConfigureAppDbContext(builder);
-            RegisterServices(builder.Services);
             ConfigureAuthentication(builder);
+            ConfigureAuthorization(builder);
+            RegisterServices(builder.Services);
             AddMappers(builder.Services);
         }
 
@@ -89,6 +90,20 @@ namespace WebAPI
 
         }
 
+        private static void ConfigureAuthorization(WebApplicationBuilder builder)
+        {
+            //builder.Services.AddAuthorization(options =>
+            //{
+            //    foreach (var permissionId in PermissionIdList.GetPermissions())
+            //    {
+            //        options.AddPolicy(permissionId, policy =>
+            //        {
+            //            policy.RequireClaim(CustomClaimsType.PERMISSION_ID, permissionId);
+            //        });
+            //    }
+            //});
+        }
+
         private static void RegisterServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddControllers();
@@ -118,6 +133,18 @@ namespace WebAPI
             serviceCollection.AddAutoMapper(typeof(DocumentMappingProfile));
             serviceCollection.AddAutoMapper(typeof(ShipMappingProfile));
             //serviceCollection.AddAutoMapper(typeof(InvoiceMappingProfile));
+        }
+
+        public static void InitializeSeeds(this WebApplication app)
+        {
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var roleInitializer = scope.ServiceProvider.GetRequiredService<RoleInitializer>();
+            //    roleInitializer.InitializeRoles().Wait();
+
+            //    var permissionInitializer = scope.ServiceProvider.GetRequiredService<PermissionInitializer>();
+            //    permissionInitializer.InitializePermissions().Wait();
+            //}
         }
 
         public static void RegisterMiddleware(this WebApplication app)
