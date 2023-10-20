@@ -3,9 +3,11 @@ using DAL.Entity;
 using Domain.Mappers;
 using Domain.Repository;
 using Domain.Seeds;
+using Domain.Services.AppUserService;
 using Domain.Services.ClientService;
 using Domain.Services.ContactPersonService;
 using Domain.Services.DocumentService;
+using Domain.Services.InvoiceService;
 using Domain.Services.OrderService;
 using Domain.Services.ShipService;
 using Example.Domain.Repository;
@@ -115,11 +117,11 @@ namespace WebAPI
             //serviceCollection.AddScoped<JWTService>();
 
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            // serviceCollection.AddScoped<AccountService>();
+            serviceCollection.AddScoped<AppUserService>();
             serviceCollection.AddScoped<ShipService>();
             serviceCollection.AddScoped<ClientService>();
             serviceCollection.AddScoped<ContactPersonService>();
-            //serviceCollection.AddScoped<InvoiceService>();
+            serviceCollection.AddScoped<InvoiceService>();
             serviceCollection.AddScoped<OrderService>();
             serviceCollection.AddScoped<DocumentService>();
         }
@@ -127,12 +129,13 @@ namespace WebAPI
         private static void AddMappers(IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(typeof(ClientMappingProfile));
-            //serviceCollection.AddAutoMapper(typeof(ContactPersonMappingProfile));
-            //serviceCollection.AddAutoMapper(typeof(ContractMappingProfile));
+            serviceCollection.AddAutoMapper(typeof(ContactPersonMappingProfile));
+            serviceCollection.AddAutoMapper(typeof(ContractMappingProfile));
             serviceCollection.AddAutoMapper(typeof(OrderMappingProfile));
             serviceCollection.AddAutoMapper(typeof(DocumentMappingProfile));
             serviceCollection.AddAutoMapper(typeof(ShipMappingProfile));
-            //serviceCollection.AddAutoMapper(typeof(InvoiceMappingProfile));
+            serviceCollection.AddAutoMapper(typeof(InvoiceMappingProfile));
+            serviceCollection.AddAutoMapper(typeof(AppUserMappingProfile));
         }
 
         public static void InitializeSeeds(this WebApplication app)

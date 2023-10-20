@@ -10,6 +10,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddHttpClient();
+
 builder.ConfigureServices();
 
 var app = builder.Build();
@@ -21,6 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

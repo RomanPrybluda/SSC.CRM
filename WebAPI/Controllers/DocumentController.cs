@@ -1,7 +1,5 @@
-﻿using DAL.Constant;
-using Domain.Services.DocumentService;
+﻿using Domain.Services.DocumentService;
 using Domain.Services.DocumentService.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -11,10 +9,10 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("documents")]
-    [Authorize(Roles.SUPER_ADMIN)]
-    [Authorize(Roles.DIRECTOR)]
-    [Authorize(Roles.MANAGER)]
-    [Authorize(Roles.SENIOR_SURVEYOR)]
+    //[Authorize(Roles.SUPER_ADMIN)]
+    //[Authorize(Roles.DIRECTOR)]
+    //[Authorize(Roles.MANAGER)]
+    //[Authorize(Roles.SENIOR_SURVEYOR)]
 
     public class DocumentController : ControllerBase
     {
@@ -50,7 +48,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(CreateDocumentResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<CreateDocumentResponse>> CreateDocument([FromBody] CreateDocumentRequest request)
+        public async Task<ActionResult<CreateDocumentResponse>> CreateDocument([FromQuery][FromBody] CreateDocumentRequest request)
         {
             var document = await _documentService.CreateDocumentAsync(request);
             return Ok(document);
@@ -61,7 +59,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateDocumentResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<UpdateDocumentResponse>> UpdateDocument([Required] Guid id, [FromBody] UpdateDocumentRequest request)
+        public async Task<ActionResult<UpdateDocumentResponse>> UpdateDocument([Required] Guid id, [FromQuery][FromBody] UpdateDocumentRequest request)
         {
             var document = await _documentService.UpdateDocumentAsync(id, request);
             return Ok(document);

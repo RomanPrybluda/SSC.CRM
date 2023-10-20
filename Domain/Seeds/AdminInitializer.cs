@@ -20,8 +20,8 @@ namespace Domain.Seeds
                 {
                     UserName = adminEmail,
                     Email = adminEmail,
-                    FirstName = "ADMIN",
-                    LastName = "ADMIN",
+                    FirstName = "Super admin",
+                    LastName = "Super admin",
                 };
 
                 var result = await userManager.CreateAsync(admin, adminPassword);

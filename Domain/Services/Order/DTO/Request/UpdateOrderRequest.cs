@@ -1,4 +1,5 @@
 ﻿using DAL.Entity;
+using DAL.Enum;
 
 namespace Domain.Services.ServicesOrder.DTO
 {
@@ -11,6 +12,8 @@ namespace Domain.Services.ServicesOrder.DTO
         public Guid ContractId { get; set; }
 
         public ICollection<Document>? Documents { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
 
         public bool AllDocsAreReady { get; set; }
 

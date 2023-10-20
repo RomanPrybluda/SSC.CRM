@@ -1,7 +1,5 @@
-﻿using DAL.Constant;
-using Domain.Services.ContactPersonService;
+﻿using Domain.Services.ContactPersonService;
 using Domain.Services.ContactPersonService.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -11,9 +9,9 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("contactpersons")]
-    [Authorize(Roles.SUPER_ADMIN)]
-    [Authorize(Roles.DIRECTOR)]
-    [Authorize(Roles.MANAGER)]
+    //[Authorize(Roles.SUPER_ADMIN)]
+    //[Authorize(Roles.DIRECTOR)]
+    //[Authorize(Roles.MANAGER)]
 
     public class ContactPersonController : ControllerBase
     {
@@ -49,17 +47,18 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(CreateContactPersonResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<CreateContactPersonResponse>> CreateContactPerson([FromBody] CreateContactPersonRequest request)
+        public async Task<ActionResult<CreateContactPersonResponse>> CreateContactPerson([FromQuery][FromBody][Required] CreateContactPersonRequest request)
         {
             var contactPerson = await _contactPersonService.CreateContactPersonAsync(request);
             return Ok(contactPerson);
         }
 
-        [HttpPut("{id:Guid}")]
+        [HttpPut]
+        [Route("{id:Guid}")]
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateContactPersonResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<UpdateContactPersonResponse>> UpdateContactPerson([Required] Guid id, [FromBody] UpdateContactPersonRequest request)
+        public async Task<ActionResult<UpdateContactPersonResponse>> UpdateContactPerson([Required] Guid id, [FromQuery][FromBody][Required] UpdateContactPersonRequest request)
         {
             var contactPerson = await _contactPersonService.UpdateContactPersonAsync(id, request);
             return Ok(contactPerson);

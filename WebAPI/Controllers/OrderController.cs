@@ -1,7 +1,5 @@
-﻿using DAL.Constant;
-using Domain.Services.OrderService;
+﻿using Domain.Services.OrderService;
 using Domain.Services.ServicesOrder.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -11,9 +9,9 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("orders")]
-    [Authorize(Roles.SUPER_ADMIN)]
-    [Authorize(Roles.DIRECTOR)]
-    [Authorize(Roles.MANAGER)]
+    //[Authorize(Roles.SUPER_ADMIN)]
+    //[Authorize(Roles.DIRECTOR)]
+    //[Authorize(Roles.MANAGER)]
 
     public class OrderController : ControllerBase
     {
@@ -49,7 +47,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(CreateOrderResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<CreateOrderResponse>> CreateOrder([FromBody] CreateOrderRequest request)
+        public async Task<ActionResult<CreateOrderResponse>> CreateOrder([FromQuery][FromBody] CreateOrderRequest request)
         {
             var order = await _orderService.CreateOrderAsync(request);
             return Ok(order);
@@ -60,7 +58,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateOrderResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<UpdateOrderResponse>> UpdateOrder([Required] Guid id, [FromBody] UpdateOrderRequest request)
+        public async Task<ActionResult<UpdateOrderResponse>> UpdateOrder([Required] Guid id, [FromQuery][FromBody] UpdateOrderRequest request)
         {
             var order = await _orderService.UpdateOrderAsync(id, request);
             return Ok(order);

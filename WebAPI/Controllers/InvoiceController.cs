@@ -1,7 +1,5 @@
-﻿using DAL.Constant;
-using Domain.Services.InvoiceService;
+﻿using Domain.Services.InvoiceService;
 using Domain.Services.InvoiceServices.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -11,10 +9,10 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("invoices")]
-    [Authorize(Roles.SUPER_ADMIN)]
-    [Authorize(Roles.DIRECTOR)]
-    [Authorize(Roles.MANAGER)]
-    [Authorize(Roles.ACCOUNTANT)]
+    //[Authorize(Roles.SUPER_ADMIN)]
+    //[Authorize(Roles.DIRECTOR)]
+    //[Authorize(Roles.MANAGER)]
+    //[Authorize(Roles.ACCOUNTANT)]
 
     public class InvoiceController : ControllerBase
     {
@@ -50,7 +48,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(CreateInvoiceResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<CreateInvoiceResponse>> CreateInvoice([FromBody] CreateInvoiceRequest request)
+        public async Task<ActionResult<CreateInvoiceResponse>> CreateInvoice([FromQuery][FromBody] CreateInvoiceRequest request)
         {
             var invoice = await _invoiceService.CreateInvoiceAsync(request);
             return Ok(invoice);
@@ -61,7 +59,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateInvoiceResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<UpdateInvoiceResponse>> UpdateInvoice([Required] Guid id, [FromBody] UpdateInvoiceRequest request)
+        public async Task<ActionResult<UpdateInvoiceResponse>> UpdateInvoice([Required] Guid id, [FromQuery][FromBody] UpdateInvoiceRequest request)
         {
             var invoice = await _invoiceService.UpdateInvoiceAsync(id, request);
             return Ok(invoice);

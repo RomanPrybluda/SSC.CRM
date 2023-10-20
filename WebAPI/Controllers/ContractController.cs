@@ -1,7 +1,5 @@
-﻿using DAL.Constant;
-using Domain.Services.ContractService;
+﻿using Domain.Services.ContractService;
 using Domain.Services.ContractService.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -11,9 +9,9 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("contracts")]
-    [Authorize(Roles.SUPER_ADMIN)]
-    [Authorize(Roles.DIRECTOR)]
-    [Authorize(Roles.MANAGER)]
+    //[Authorize(Roles.SUPER_ADMIN)]
+    //[Authorize(Roles.DIRECTOR)]
+    //[Authorize(Roles.MANAGER)]
 
     public class ContractController : ControllerBase
     {
@@ -49,7 +47,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(CreateContractResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<CreateContractResponse>> CreateContract([FromBody] CreateContractRequest request)
+        public async Task<ActionResult<CreateContractResponse>> CreateContract([FromQuery][FromBody] CreateContractRequest request)
         {
             var contract = await _contractService.CreateContractAsync(request);
             return Ok(contract);
@@ -60,7 +58,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateContractResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<UpdateContractResponse>> UpdateContract([Required] Guid id, [FromBody] UpdateContractRequest request)
+        public async Task<ActionResult<UpdateContractResponse>> UpdateContract([Required] Guid id, [FromQuery][FromBody] UpdateContractRequest request)
         {
             var contract = await _contractService.UpdateContractAsync(id, request);
             return Ok(contract);

@@ -1,7 +1,5 @@
-﻿using DAL.Constant;
-using Domain.Services.AppUserService;
+﻿using Domain.Services.AppUserService;
 using Domain.Services.AppUserService.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -10,10 +8,10 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Produces("application/json")]
-    [Route("appusers")]
-    [Authorize(Roles.SUPER_ADMIN)]
-    [Authorize(Roles.DIRECTOR)]
-    [Authorize(Roles.MANAGER)]
+    [Route("users")]
+    //[Authorize(Roles.SUPER_ADMIN)]
+    //[Authorize(Roles.DIRECTOR)]
+    //[Authorize(Roles.MANAGER)]
 
     public class AppUserController : ControllerBase
     {
@@ -49,7 +47,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(CreateAppUserResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<CreateAppUserResponse>> CreateAppUser([FromBody] CreateAppUserRequest request)
+        public async Task<ActionResult<CreateAppUserResponse>> CreateAppUser([FromQuery][FromBody] CreateAppUserRequest request)
         {
             var appUser = await _appUserService.CreateAppUserAsync(request);
             return Ok(appUser);
@@ -60,7 +58,7 @@ namespace WebAPI.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateAppUserResponse))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
-        public async Task<ActionResult<UpdateAppUserResponse>> UpdateAppUser([Required] Guid id, [FromBody] UpdateAppUserRequest request)
+        public async Task<ActionResult<UpdateAppUserResponse>> UpdateAppUser([Required] Guid id, [FromQuery][FromBody] UpdateAppUserRequest request)
         {
             var appUser = await _appUserService.UpdateAppUserAsync(id, request);
             return Ok(appUser);

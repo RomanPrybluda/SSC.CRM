@@ -1,7 +1,5 @@
-﻿using DAL.Constant;
-using Domain.Services.ShipService;
+﻿using Domain.Services.ShipService;
 using Domain.Services.ShipService.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -11,11 +9,11 @@ namespace WebAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("ships")]
-    [Authorize(Roles.SUPER_ADMIN)]
-    [Authorize(Roles.DIRECTOR)]
-    [Authorize(Roles.MANAGER)]
-    [Authorize(Roles.SENIOR_SURVEYOR)]
-    [Authorize(Roles.MIDDLE_SURVEYOR)]
+    //[Authorize(Roles.SUPER_ADMIN)]
+    //[Authorize(Roles.DIRECTOR)]
+    //[Authorize(Roles.MANAGER)]
+    //[Authorize(Roles.SENIOR_SURVEYOR)]
+    //[Authorize(Roles.MIDDLE_SURVEYOR)]
 
     public class ShipController : ControllerBase
     {
