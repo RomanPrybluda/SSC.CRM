@@ -6,6 +6,6 @@ namespace Domain.Services.ContractService.DTO
     {
         public DateTime EndDate { get; set; }
 
-        public ContractStatus ContractStatus { get; set; }
+        public ContractStatus ContractStatus { get; set; } = ContractStatus.Unsigned;
     }
 }

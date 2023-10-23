@@ -9,17 +9,13 @@ namespace Domain.Services.InvoiceServices.DTO
         public string? InvoiceNumber { get; set; }
 
         [Required]
-        public decimal TotalAmount { get; set; }
-
-        public InvoiceStatus InvoiceStatus { get; set; }
+        public decimal Amount { get; set; }
 
         [Required]
-        public Guid ClientId { get; set; }
+        public InvoiceStatus InvoiceStatus { get; set; } = InvoiceStatus.Pending;
 
         [Required]
-        public Guid ContactPersonId { get; set; }
+        public Guid ContractId { get; set; }
 
-        [Required]
-        public Guid OrderId { get; set; }
     }
 }

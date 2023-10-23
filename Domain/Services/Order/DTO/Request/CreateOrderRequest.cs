@@ -8,7 +8,7 @@ namespace Domain.Services.ServicesOrder.DTO
         public string? OrderNumber { get; set; }
 
         [Required]
-        public Guid ClientId { get; set; }
+        public Guid ContractId { get; set; }
 
         [Required]
         public string? WorkOrderDescription { get; set; }

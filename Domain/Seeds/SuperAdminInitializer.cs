@@ -5,10 +5,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace Domain.Seeds
 {
-    public class AdminInitializer
+    public class SuperAdminInitializer
     {
 
-        public static async Task InitializeRole(UserManager<AppUser> userManager, IConfiguration configuration)
+        public static async Task InitializeSuperAdmin(UserManager<AppUser> userManager, IConfiguration configuration)
         {
             string adminEmail = "admin@ssc.com";
             string adminPassword = "AdminSsc!123#";

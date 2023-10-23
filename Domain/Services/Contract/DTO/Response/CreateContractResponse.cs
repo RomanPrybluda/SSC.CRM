@@ -2,6 +2,6 @@
 {
     public class CreateContractResponse : CreateContractRequest
     {
-        public Guid CreateContractId { get; set; }
+        public Guid ContractId { get; set; }
     }
 }

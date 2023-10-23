@@ -7,11 +7,20 @@ namespace Domain.Seeds
     {
         public static async Task InitializeRole(RoleManager<IdentityRole> roleManager)
         {
-            foreach (var roleName in typeof(Roles).GetFields())
+            foreach (var roleName in new[]
             {
-                if (!await roleManager.RoleExistsAsync(roleName.Name))
+                Roles.SUPER_ADMIN,
+                Roles.DIRECTOR,
+                Roles.ACCOUNTANT,
+                Roles.MANAGER,
+                Roles.SENIOR_SURVEYOR,
+                Roles.MIDDLE_SURVEYOR,
+                Roles.JUNIOR_SURVEYOR
+            })
+            {
+                if (await roleManager.FindByNameAsync(roleName) == null)
                 {
-                    var role = new IdentityRole { Name = roleName.Name };
+                    var role = new IdentityRole { Name = roleName };
                     await roleManager.CreateAsync(role);
                 }
             }

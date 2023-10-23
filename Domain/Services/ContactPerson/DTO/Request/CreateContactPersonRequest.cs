@@ -20,7 +20,6 @@ namespace Domain.Services.ContactPersonService.DTO
         [Required]
         public string? Position { get; set; }
 
-        [Required]
         public string? Notes { get; set; }
 
         [Required]

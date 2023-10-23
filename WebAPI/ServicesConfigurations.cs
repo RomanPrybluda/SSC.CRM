@@ -6,6 +6,7 @@ using Domain.Seeds;
 using Domain.Services.AppUserService;
 using Domain.Services.ClientService;
 using Domain.Services.ContactPersonService;
+using Domain.Services.ContractService;
 using Domain.Services.DocumentService;
 using Domain.Services.InvoiceService;
 using Domain.Services.OrderService;
@@ -60,9 +61,29 @@ namespace WebAPI
                 await RoleInitializer.InitializeRole(roleManager);
 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                await AdminInitializer.InitializeRole(userManager, configuration);
-            }
+                await SuperAdminInitializer.InitializeSuperAdmin(userManager, configuration);
 
+                var clientInitializer = new ClientInitializer(context);
+                clientInitializer.InitializeClients();
+
+                var contactPersonInitializer = new ContactPersonInitializer(context);
+                contactPersonInitializer.InitializeContactPersons();
+
+                var shipInitializer = new ShipInitializer(context);
+                shipInitializer.InitializeShips();
+
+                var contractInitializer = new ContractInitializer(context);
+                contractInitializer.InitializeContracts();
+
+                var orderInitializer = new OrderInitializer(context);
+                orderInitializer.InitializeOrders();
+
+                var documentInitializer = new DocumentInitializer(context);
+                documentInitializer.InitializeDocuments();
+
+                var invioceInitializer = new InvoiceInitializer(context);
+                invioceInitializer.InitializeInvoices();
+            }
         }
 
         private static void ConfigureAuthentication(WebApplicationBuilder builder)
@@ -78,13 +99,13 @@ namespace WebAPI
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidIssuer = builder.Configuration["JWTparams:Issuer"],
+                    ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
                     ValidateAudience = true,
-                    ValidAudience = builder.Configuration["JWTparams:Audience"],
+                    ValidAudience = builder.Configuration["JwtSettings:Audience"],
                     ValidateIssuerSigningKey = true,
 
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(builder.Configuration["JWTparams:Key"])
+                        Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"])
                     ),
                     ValidateLifetime = true
                 };
@@ -121,6 +142,7 @@ namespace WebAPI
             serviceCollection.AddScoped<ShipService>();
             serviceCollection.AddScoped<ClientService>();
             serviceCollection.AddScoped<ContactPersonService>();
+            serviceCollection.AddScoped<ContractService>();
             serviceCollection.AddScoped<InvoiceService>();
             serviceCollection.AddScoped<OrderService>();
             serviceCollection.AddScoped<DocumentService>();
@@ -136,18 +158,6 @@ namespace WebAPI
             serviceCollection.AddAutoMapper(typeof(ShipMappingProfile));
             serviceCollection.AddAutoMapper(typeof(InvoiceMappingProfile));
             serviceCollection.AddAutoMapper(typeof(AppUserMappingProfile));
-        }
-
-        public static void InitializeSeeds(this WebApplication app)
-        {
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var roleInitializer = scope.ServiceProvider.GetRequiredService<RoleInitializer>();
-            //    roleInitializer.InitializeRoles().Wait();
-
-            //    var permissionInitializer = scope.ServiceProvider.GetRequiredService<PermissionInitializer>();
-            //    permissionInitializer.InitializePermissions().Wait();
-            //}
         }
 
         public static void RegisterMiddleware(this WebApplication app)

@@ -33,6 +33,4 @@ app.MapControllers();
 
 app.RegisterMiddleware();
 
-app.InitializeSeeds();
-
 app.Run();
