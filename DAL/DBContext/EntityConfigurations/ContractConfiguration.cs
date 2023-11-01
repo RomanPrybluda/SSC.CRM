@@ -14,11 +14,13 @@ namespace DAL.DBContext.EntityConfigurations
 
             builder.HasMany(contract => contract.Orders)
                     .WithOne(order => order.Contract)
-                    .HasForeignKey(order => order.ContractId);
+                    .HasForeignKey(order => order.ContractId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(contract => contract.Invoices)
                     .WithOne(invoice => invoice.Contract)
-                    .HasForeignKey(invoice => invoice.ContractId);
+                    .HasForeignKey(invoice => invoice.ContractId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(contract => contract.ContractId)
                     .HasDefaultValueSql("NEWID()");

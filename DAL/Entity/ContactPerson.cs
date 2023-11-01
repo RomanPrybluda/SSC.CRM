@@ -18,6 +18,6 @@
 
         public Guid ClientId { get; set; }
 
-        public Client Client { get; set; }
+        public Client? Client { get; set; }
     }
 }

@@ -12,7 +12,8 @@ namespace DAL.DBContext.EntityConfigurations
 
             builder.HasMany(order => order.Documents)
                     .WithOne(doc => doc.Order)
-                    .HasForeignKey(doc => doc.OrderId);
+                    .HasForeignKey(doc => doc.OrderId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(order => order.OrderId)
                     .HasDefaultValueSql("NEWID()");

@@ -16,6 +16,6 @@ namespace DAL.Entity
 
         public Guid ContractId { get; set; }
 
-        public Contract Contract { get; set; }
+        public Contract? Contract { get; set; }
     }
 }

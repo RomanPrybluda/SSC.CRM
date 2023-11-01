@@ -30,10 +30,10 @@ namespace DAL.Entity
 
         public Guid OrderId { get; set; }
 
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
 
         public Guid ShipId { get; set; }
 
-        public Ship Ship { get; set; }
+        public Ship? Ship { get; set; }
     }
 }

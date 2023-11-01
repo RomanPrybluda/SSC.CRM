@@ -14,8 +14,9 @@
 
         public DateTime RegistrationDate { get; set; }
 
-        public ICollection<ContactPerson> ContactPersons { get; set; }
+        public ICollection<ContactPerson> ContactPersons { get; set; } = new List<ContactPerson>();
 
-        public ICollection<Contract> Contracts { get; set; }
+        public ICollection<Contract> Contracts { get; set; } = new List<Contract>();
+
     }
 }

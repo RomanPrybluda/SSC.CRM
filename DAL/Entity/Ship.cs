@@ -28,7 +28,7 @@ namespace DAL.Entity
 
         public string? ShipOperator { get; set; }
 
-        public ICollection<Document> Documents { get; set; }
+        public ICollection<Document> Documents { get; set; } = new List<Document>();
 
         //public Guid DocumentId { get; set; }
 
