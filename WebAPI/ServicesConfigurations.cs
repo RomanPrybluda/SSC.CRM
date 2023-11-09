@@ -1,21 +1,14 @@
 ﻿using DAL.DBContext;
 using DAL.Entity;
-using Domain.Mappers;
 using Domain.Repository;
 using Domain.Seeds;
-using Domain.Services.AppUserService;
-using Domain.Services.ClientService;
-using Domain.Services.ContactPersonService;
-using Domain.Services.ContractService;
-using Domain.Services.DocumentService;
 using Domain.Services.InvoiceService;
-using Domain.Services.OrderService;
-using Domain.Services.ShipService;
 using Example.Domain.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Services;
 using System.Text;
 using WebAPI.Middleware;
 

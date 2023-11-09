@@ -1,7 +1,5 @@
-﻿using Domain.Services.ContractService;
-using Domain.Services.ContractService.DTO;
-using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using Services;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Controllers
@@ -23,9 +21,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetContractResponse))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
-        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
         public async Task<ActionResult<GetContractResponse>> GetAllContracts()
         {
             var contracts = await _contractService.GetAllContractsAsync();
@@ -33,10 +28,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("client/{clientId:Guid}")]
+        public async Task<ActionResult<GetContractResponse>> GetAllContractsByClient([Required] Guid clientId)
+        {
+            var contracts = await _contractService.GetAllContractsByClientAsync(clientId);
+            return Ok(contracts);
+        }
+
+        [HttpGet]
         [Route("{id:Guid}")]
-        [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(GetContractResponse))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
-        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
         public async Task<ActionResult<GetContractResponse>> GetContractById([Required] Guid id)
         {
             var contract = await _contractService.GetContractByIdAsync(id);
@@ -44,9 +44,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(CreateContractResponse))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
-        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
         public async Task<ActionResult<CreateContractResponse>> CreateContract([FromQuery][FromBody] CreateContractRequest request)
         {
             var contract = await _contractService.CreateContractAsync(request);
@@ -55,9 +52,6 @@ namespace WebAPI.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
-        [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(UpdateContractResponse))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
-        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
         public async Task<ActionResult<UpdateContractResponse>> UpdateContract([Required] Guid id, [FromQuery][FromBody] UpdateContractRequest request)
         {
             var contract = await _contractService.UpdateContractAsync(id, request);
@@ -66,9 +60,6 @@ namespace WebAPI.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
-        [SwaggerResponse(StatusCodes.Status204NoContent)]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad request", typeof(ErrorResponse))]
-        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error", typeof(ErrorResponse))]
         public async Task<ActionResult> DeleteContract([Required] Guid id)
         {
             await _contractService.DeleteContractAsync(id);

@@ -1,6 +1,5 @@
-﻿using Domain.Services.AppUserService;
-using Domain.Services.AppUserService.DTO;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 

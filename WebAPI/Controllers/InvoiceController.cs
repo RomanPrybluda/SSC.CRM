@@ -1,6 +1,6 @@
 ﻿using Domain.Services.InvoiceService;
-using Domain.Services.InvoiceServices.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 

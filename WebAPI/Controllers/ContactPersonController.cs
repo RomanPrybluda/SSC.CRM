@@ -1,6 +1,5 @@
-﻿using Domain.Services.ContactPersonService;
-using Domain.Services.ContactPersonService.DTO;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 

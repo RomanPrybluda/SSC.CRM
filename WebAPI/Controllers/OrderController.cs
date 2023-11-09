@@ -1,6 +1,5 @@
-﻿using Domain.Services.OrderService;
-using Domain.Services.ServicesOrder.DTO;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 
