@@ -1,307 +1,317 @@
----
-category: project
-project: SSC
----
 
 SSС Ship Survey Company
 
-
-- [ ] create User stories
-- [ ] create Job stories
-- [ ] create tasks
-
 # ENTITIES
 
-### Contract - Договор на выполнение работ
-- Включает в себя описание работ, что должны быть выполнены для компании-клиента.
-- Содержит информацию о сумме за выполняемые работы.
-- Включает в себя реквизиты компании клиента.
-- Содержит контакты лица, подписывающего контракт от имени компании клиента.
-- Содержит информацию о статусе контракта:
-  не подписан, подписан, отменен.
+### Contract - Contract for the performance of work
+- Includes a description of the work that must be performed for the client company.
+- Contains information about the amount for work performed.
+- Includes client company details.
+- Contains contact details of the person signing the contract on behalf of the client's company.
+- Contains information about the contract status: not signed, signed, cancelled.
 
-### Order (заявка) 
-- Включает в себя перечень документов которые должны быть выполнены.
-- Содержит информацию о заказчике, составлен ли договор на данную работу, подписан ли договор на данную работу, все ли документы выполнены, все ли документы одобрены.
-- Информацию о статусе контракта: 
-  не подписан, подписан, подписан, отменен.
-  - Информацию о статусе заявки: 
-  не закрыта, закрыта, отменена.
+### Order 
+- Includes a list of documents that must be completed.
+- Contains information about the customer, whether a contract for this work has been drawn up, whether the contract for this work has been signed, whether all documents have been completed, whether all documents have been approved.
+- Information about the status of the contract: not signed, signed, signed, cancelled.
+- Information about the status of the application: not closed, closed, cancelled.
   
 ### Document
-- Документ имеет свой порядковый номер, который включает в себя номер заявки.
-- За документом закрепляется исполнитель.
-- За документом закрепляется проверяющий документа.
-- Содержит информацию о статусе документа:   
-  разработчик не назначен , разработчик назанчен, в работе, на проверке, редактируется, готов к отправке заказчику, согласован.
-- Содержит информацию о наличии необходмой документации для разработки документа получаемой от заказчика.
+- The document has its own serial number, which includes the application number.
+- An executor is assigned to the document.
+- A document verifier is assigned to the document.
+- Contains information about the status of the document: developer has not been assigned, developer has been appointed, in progress, being reviewed, being edited, ready to be sent to the customer, approved.
+- Contains information about the availability of necessary documentation for the development of a document received from the customer.
   
 ### Invoice 
-- Информация о компании-клиент
-- Номер договора
-- Сумма оплаты за выпоненные работы.
+- Information about the client company
+- Contract number
+- The amount of payment for work performed.
 	 
+---
 
 # User story
 
-1. Менеджеры:
-    
-    - Как менеджер, я хочу иметь возможность войти в систему, чтобы получить доступ ко всем разделам сайта.
-    - Как менеджер, я хочу иметь возможность создавать новые заявки, чтобы инициировать работу по сюрвею.
-    - Как менеджер, я хочу иметь возможность назначать ответственных сюрвееров для выполнения заявок.
-    - Как менеджер, я хочу иметь возможность создавать и редактировать договора с клиентами.
-2. Бухгалтер:
-    
-    - Как бухгалтер, я хочу иметь доступ ко всем разделам сайта, чтобы управлять финансовыми данными.
-    - Как бухгалтер, я хочу иметь возможность создавать и редактировать договора с клиентами, чтобы обеспечивать актуальность финансовых данных.
-3. Главные сюрвееры:
-    
-    - Как главный сюрвеер, я хочу иметь возможность создавать новые документы в рамках заявки, чтобы начать процесс сюрвея.
-    - Как главный сюрвеер, я хочу иметь возможность назначать ответственных сотрудников (младших сюрвееров) для выполнения конкретных задач в заявке.
-4. Младшие сюрвееры:
-    
-    - Как младший сюрвеер, я хочу иметь доступ ко всем разделам, кроме разделов Договора и Бухгалтерии.
-    - Как младший сюрвеер, я хочу иметь возможность работать с документами и задачами, назначенными главными сюрвеерами.
-5. Супер админ:
-    
-    - Как супер администратор, я хочу иметь полный доступ к административной панели сайта, чтобы управлять пользователями, ролями и настройками системы.
-    - Как супер администратор, я хочу иметь возможность мониторить активность пользователей и обеспечивать безопасность системы.
+1. Managers:    
+- As a manager, I want to be able to log in to access all sections of the site.
+- As a manager, I want to be able to create new requests to initiate survey work.
+- As a manager, I want to be able to appoint responsible surveyors to carry out applications.
+- As a manager, I want to be able to create and edit contracts with clients.
+       
+2. Accountant:    
+- As an accountant, I want to have access to all sections of the site to manage financial data.
+- As an accountant, I want to be able to create and edit client agreements to ensure financial data is up to date.
 
-Эти User story могут служить отправной точкой для разработки и дизайна вашего CRM-сайта для сюрвейерской компании и помочь вам определить функциональные требования для каждой категории пользователей.
+3. Main surveyors:    
+- As the Principal Surveyor, I want to be able to create new documents within the application to begin the survey process.
+- As the Chief Surveyor, I want to be able to assign responsible staff (junior surveyors) to perform specific tasks in the application.
+  
+4. Junior surveyors:    
+- As a junior surveyor, I want to have access to all sections except the Contract and Accounting sections.
+- As a junior surveyor, I want to be able to work with documents and tasks assigned by the chief surveyors.
+  
+5. Super admin:
+- As a super administrator, I want to have full access to the site's administrative panel to manage users, roles and system settings.
+- As a super administrator, I want to be able to monitor user activity and ensure system security.
 
-# Endpoints by ROLE
-
-Ваш API может включать следующие конечные точки (endpoints) с учетом описанных User story для разных категорий пользователей:
-
-1. Менеджеры:
-    - `POST /api/login`: Аутентификация пользователя.
-    - `GET /api/requests`: Получение списка заявок.
-    - `POST /api/requests`: Создание новой заявки.
-    - `PUT /api/requests/{id}/assign`: Назначение ответственных сюрвееров для заявки.
-    - `POST /api/contracts`: Создание нового договора.
-    - `PUT /api/contracts/{id}`: Редактирование существующего договора.
-
-2. Бухгалтер:
-    - `GET /api/contracts`: Получение списка договоров.
-    - `POST /api/contracts`: Создание нового договора.
-    - `PUT /api/contracts/{id}`: Редактирование существующего договора.
-
-3. Главные сюрвееры:
-    - `POST /api/requests/{id}/documents`: Создание новых документов в рамках заявки.
-    - `PUT /api/requests/{id}/assign`: Назначение ответственных младших сюрвееров для выполнения задач в заявке.
-
-4. Младшие сюрвееры:
-    - `GET /api/requests/{id}/documents`: Получение списка документов в заявке.
-    - `PUT /api/documents/{id}`: Редактирование существующего документа.
-    
-1. Супер админ:
-    - `GET /api/users`: Получение списка пользователей.
-    - `POST /api/users`: Создание нового пользователя.
-    - `PUT /api/users/{id}`: Редактирование данных пользователя.
-    - `DELETE /api/users/{id}`: Удаление пользователя.
-    - `GET /api/roles`: Получение списка ролей.
-    - `POST /api/roles`: Создание новой роли.
-    - `PUT /api/roles/{id}`: Редактирование роли.
-    - `DELETE /api/roles/{id}`: Удаление роли.
-
-Это всего лишь базовый набор конечных точек, и вы можете дополнить его в зависимости от конкретных требований и потребностей вашего проекта. Не забудьте обеспечить аутентификацию и авторизацию для разных категорий пользователей, чтобы обеспечить безопасность вашего API.
-
-# Endpoints by Entity
-
-Для API вашего сайта CRM для сюрвейерской компании, учитывая предложенные User story и сущности, можно предложить следующие ендпоинты:
-
-1. Заявки:
-
-   - `GET /api/requests`: Получение списка всех заявок.
-   - `GET /api/requests/{request_id}`: Получение информации о конкретной заявке по идентификатору.
-   - `POST /api/requests`: Создание новой заявки.
-   - `PUT /api/requests/{request_id}`: Обновление информации о заявке.
-   - `DELETE /api/requests/{request_id}`: Удаление заявки.
-
-2. Документы в заявке:
-
-   - `GET /api/requests/{request_id}/documents`: Получение списка документов в заявке.
-   - `GET /api/requests/{request_id}/documents/{document_id}`: Получение информации о конкретном документе в заявке.
-   - `POST /api/requests/{request_id}/documents`: Создание нового документа в заявке.
-   - `PUT /api/requests/{request_id}/documents/{document_id}`: Обновление информации о документе в заявке.
-   - `DELETE /api/requests/{request_id}/documents/{document_id}`: Удаление документа в заявке.
-
-3. Договоры:
-
-   - `GET /api/contracts`: Получение списка всех договоров.
-   - `GET /api/contracts/{contract_id}`: Получение информации о конкретном договоре по идентификатору.
-   - `POST /api/contracts`: Создание нового договора.
-   - `PUT /api/contracts/{contract_id}`: Обновление информации о договоре.
-   - `DELETE /api/contracts/{contract_id}`: Удаление договора.
-
-4. Компании-клиенты:
-
-   - `GET /api/clients`: Получение списка всех компаний-клиентов.
-   - `GET /api/clients/{client_id}`: Получение информации о конкретной компании-клиенте по идентификатору.
-   - `POST /api/clients`: Создание новой компании-клиента.
-   - `PUT /api/clients/{client_id}`: Обновление информации о компании-клиенте.
-   - `DELETE /api/clients/{client_id}`: Удаление компании-клиента.
-
-5. Контактные лица компаний-клиентов:
-
-   - `GET /api/clients/{client_id}/contacts`: Получение списка контактных лиц компании-клиента.
-   - `GET /api/clients/{client_id}/contacts/{contact_id}`: Получение информации о конкретном контактном лице по идентификатору.
-   - `POST /api/clients/{client_id}/contacts`: Создание нового контактного лица.
-   - `PUT /api/clients/{client_id}/contacts/{contact_id}`: Обновление информации о контактном лице.
-   - `DELETE /api/clients/{client_id}/contacts/{contact_id}`: Удаление контактного лица.
-
-Эти ендпоинты должны позволить вам взаимодействовать с данными и выполнять операции, описанные в предложенных User story, в вашем веб-сервисе CRM.
+These are basic User stories, they can be changed and supplemented during the project.
 
 ---
 
+# Endpoints by ROLE
 
+1. Managers:
+     - `POST /api/login`: User authentication.
+     - `GET /api/requests`: Receiving a list of requests.
+     - `POST /api/requests`: Create a new request.
+     - `PUT /api/requests/{id}/assign`: Assignment of responsible surveyors for the application.
+     - `POST /api/contracts`: Create a new contract.
+     - `PUT /api/contracts/{id}`: Editing an existing contract.
+
+2. Accountant:
+     - `GET /api/contracts`: Retrieving a list of contracts.
+     - `POST /api/contracts`: Create a new contract.
+     - `PUT /api/contracts/{id}`: Editing an existing contract.
+
+3. Main surveyors:
+     - `POST /api/requests/{id}/documents`: Creation of new documents within the application.
+     - `PUT /api/requests/{id}/assign`: Assignment of responsible junior surveyors to perform tasks in the application.
+
+4. Junior surveyors:
+     - `GET /api/requests/{id}/documents`: Receiving a list of documents in the application.
+     - `PUT /api/documents/{id}`: Editing an existing document.
+    
+1. Super admin:
+     - `GET /api/users`: Retrieving a list of users.
+     - `POST /api/users`: Create a new user.
+     - `PUT /api/users/{id}`: Editing user data.
+     - `DELETE /api/users/{id}`: Deleting a user.
+     - `GET /api/roles`: Retrieving a list of roles.
+     - `POST /api/roles`: Create a new role.
+     - `PUT /api/roles/{id}`: Editing a role.
+     - `DELETE /api/roles/{id}`: Deleting a role.
+
+This is a basic set of endpoints; they can be changed and supplemented during the project.
+Authentication and authorization for different categories of users will also be added.
+
+---
+
+# Endpoints by Entity
+
+1. Applications:
+
+    - `GET /api/requests`: Retrieving a list of all requests.
+    - `GET /api/requests/{request_id}`: Receiving information about a specific request by identifier.
+    - `POST /api/requests`: Create a new request.
+    - `PUT /api/requests/{request_id}`: Update information about the request.
+    - `DELETE /api/requests/{request_id}`: Deleting a request.
+
+2. Documents in the application:
+
+    - `GET /api/requests/{request_id}/documents`: Receiving a list of documents in the application.
+    - `GET /api/requests/{request_id}/documents/{document_id}`: Retrieving information about a specific document in the request.
+    - `POST /api/requests/{request_id}/documents`: Create a new document in the request.
+    - `PUT /api/requests/{request_id}/documents/{document_id}`: Update information about the document in the request.
+    - `DELETE /api/requests/{request_id}/documents/{document_id}`: Deleting a document in a request.
+
+3. Agreements:
+
+    - `GET /api/contracts`: Retrieving a list of all contracts.
+    - `GET /api/contracts/{contract_id}`: Retrieving information about a specific contract by identifier.
+    - `POST /api/contracts`: Create a new contract.
+    - `PUT /api/contracts/{contract_id}`: Update contract information.
+    - `DELETE /api/contracts/{contract_id}`: Deleting a contract.
+
+4. Client companies:
+
+    - `GET /api/clients`: Retrieving a list of all client companies.
+    - `GET /api/clients/{client_id}`: Retrieving information about a specific client company by identifier.
+    - `POST /api/clients`: Create a new client company.
+    - `PUT /api/clients/{client_id}`: Update information about the client company.
+    - `DELETE /api/clients/{client_id}`: Deleting a client company.
+
+5. Contact persons of client companies:
+
+    - `GET /api/clients/{client_id}/contacts`: Retrieving a list of contact persons for the client company.
+    - `GET /api/clients/{client_id}/contacts/{contact_id}`: Retrieving information about a specific contact person by identifier.
+    - `POST /api/clients/{client_id}/contacts`: Create a new contact person.
+    - `PUT /api/clients/{client_id}/contacts/{contact_id}`: Update information about the contact person.
+    - `DELETE /api/clients/{client_id}/contacts/{contact_id}`: Deleting a contact person.
+
+---
 
 # Endpoints by Service
 
-Исходя из предложенных сервисов и сущностей в вашем проекте CRM для сюрвейерской компании, вот предложенные ендпоинты для вашего WebAPI:
-
 1. **UserService**:
 
-   - `POST /api/auth/login`: Аутентификация пользователя.
-   - `POST /api/auth/register`: Регистрация нового пользователя.
-   - `GET /api/users`: Получение списка пользователей.
-   - `GET /api/users/{user_id}`: Получение информации о конкретном пользователе.
-   - `PUT /api/users/{user_id}`: Обновление информации о пользователе.
-   - `DELETE /api/users/{user_id}`: Удаление пользователя.
+    - `POST /api/auth/login`: User authentication.
+    - `POST /api/auth/register`: Registering a new user.
+    - `GET /api/users`: Retrieving a list of users.
+    - `GET /api/users/{user_id}`: Retrieving information about a specific user.
+    - `PUT /api/users/{user_id}`: Update user information.
+    - `DELETE /api/users/{user_id}`: Deleting a user.
 
 2. **RequestService**:
 
-   - `GET /api/requests`: Получение списка всех заявок.
-   - `GET /api/requests/{request_id}`: Получение информации о конкретной заявке.
-   - `POST /api/requests`: Создание новой заявки.
-   - `PUT /api/requests/{request_id}`: Обновление информации о заявке.
-   - `DELETE /api/requests/{request_id}`: Удаление заявки.
+    - `GET /api/requests`: Retrieving a list of all requests.
+    - `GET /api/requests/{request_id}`: Retrieving information about a specific request.
+    - `POST /api/requests`: Create a new request.
+    - `PUT /api/requests/{request_id}`: Update information about the request.
+    - `DELETE /api/requests/{request_id}`: Deleting a request.
 
 3. **DocumentService**:
 
-   - `GET /api/documents`: Получение списка всех документов.
-   - `GET /api/documents/{document_id}`: Получение информации о конкретном документе.
-   - `POST /api/documents`: Создание нового документа.
-   - `PUT /api/documents/{document_id}`: Обновление информации о документе.
-   - `DELETE /api/documents/{document_id}`: Удаление документа.
+    - `GET /api/documents`: Retrieving a list of all documents.
+    - `GET /api/documents/{document_id}`: Retrieving information about a specific document.
+    - `POST /api/documents`: Create a new document.
+    - `PUT /api/documents/{document_id}`: Update document information.
+    - `DELETE /api/documents/{document_id}`: Deleting a document.
 
 4. **ContractService**:
 
-   - `GET /api/contracts`: Получение списка всех договоров.
-   - `GET /api/contracts/{contract_id}`: Получение информации о конкретном договоре.
-   - `POST /api/contracts`: Создание нового договора.
-   - `PUT /api/contracts/{contract_id}`: Обновление информации о договоре.
-   - `DELETE /api/contracts/{contract_id}`: Удаление договора.
+    - `GET /api/contracts`: Retrieving a list of all contracts.
+    - `GET /api/contracts/{contract_id}`: Retrieving information about a specific contract.
+    - `POST /api/contracts`: Create a new contract.
+    - `PUT /api/contracts/{contract_id}`: Update contract information.
+    - `DELETE /api/contracts/{contract_id}`: Deleting a contract.
 
 5. **ClientService**:
 
-   - `GET /api/clients`: Получение списка всех компаний-клиентов.
-   - `GET /api/clients/{client_id}`: Получение информации о конкретной компании-клиенте.
-   - `POST /api/clients`: Создание новой компании-клиента.
-   - `PUT /api/clients/{client_id}`: Обновление информации о компании-клиенте.
-   - `DELETE /api/clients/{client_id}`: Удаление компании-клиента.
+    - `GET /api/clients`: Retrieving a list of all client companies.
+    - `GET /api/clients/{client_id}`: Retrieving information about a specific client company.
+    - `POST /api/clients`: Create a new client company.
+    - `PUT /api/clients/{client_id}`: Update information about the client company.
+    - `DELETE /api/clients/{client_id}`: Deleting a client company.
 
 6. **ContactService**:
 
-   - `GET /api/clients/{client_id}/contacts`: Получение списка контактных лиц компании-клиента.
-   - `GET /api/clients/{client_id}/contacts/{contact_id}`: Получение информации о конкретном контактном лице.
-   - `POST /api/clients/{client_id}/contacts`: Создание нового контактного лица.
-   - `PUT /api/clients/{client_id}/contacts/{contact_id}`: Обновление информации о контактном лице.
-   - `DELETE /api/clients/{client_id}/contacts/{contact_id}`: Удаление контактного лица.
+    - `GET /api/clients/{client_id}/contacts`: Retrieving a list of contact persons for the client company.
+    - `GET /api/clients/{client_id}/contacts/{contact_id}`: Retrieving information about a specific contact person.
+    - `POST /api/clients/{client_id}/contacts`: Create a new contact person.
+    - `PUT /api/clients/{client_id}/contacts/{contact_id}`: Update information about the contact person.
+    - `DELETE /api/clients/{client_id}/contacts/{contact_id}`: Deleting a contact person.
 
 7. **AssignmentService**:
 
-   - `POST /api/assignments`: Создание нового назначения для заявки или документа.
-   - `PUT /api/assignments/{assignment_id}`: Обновление информации о назначении.
-   - `DELETE /api/assignments/{assignment_id}`: Удаление назначения.
+    - `POST /api/assignments`: Create a new assignment for an application or document.
+    - `PUT /api/assignments/{assignment_id}`: Update assignment information.
+    - `DELETE /api/assignments/{assignment_id}`: Deleting an assignment.
 
 8. **AuditService**:
 
-   - `GET /api/audit-logs`: Получение журнала аудита системных событий.
+    - `GET /api/audit-logs`: Retrieving the system event audit log.
 
 9. **NotificationService**:
 
-   - `GET /api/notifications`: Получение уведомлений для текущего пользователя.
-   - `POST /api/notifications`: Отправка уведомления.
+    - `GET /api/notifications`: Receive notifications for the current user.
+    - `POST /api/notifications`: Sending a notification.
 
 10. **ReportService**:
 
-    - `GET /api/reports`: Запрос на генерацию отчетов с различными параметрами.
+     - `GET /api/reports`: Request to generate reports with various parameters.
 
 11. **AuthorizationService**:
 
-    - `POST /api/auth/token`: Запрос на получение токена для аутентификации API запросов.
+     - `POST /api/auth/token`: Request to obtain a token for authenticating API requests.
 
 12. **FileService**:
 
-    - `POST /api/files/upload`: Загрузка файлов на сервер.
-    - `GET /api/files/{file_id}`: Скачивание файла.
+     - `POST /api/files/upload`: Uploading files to the server.
+     - `GET /api/files/{file_id}`: Download a file.
 
 13. **EmailService**:
 
-    - `POST /api/emails/send`: Отправка электронных писем.
+     - `POST /api/emails/send`: Sending emails.
 
 14. **SettingsService**:
 
-    - `GET /api/settings`: Получение настроек системы.
-    - `PUT /api/settings`: Обновление настроек системы.
+     - `GET /api/settings`: Retrieving system settings.
+     - `PUT /api/settings`: Update system settings.
 
 15. **LocalizationService**:
 
-    - `GET /api/localization`: Получение локализованных текстов и сообщений для поддержки разных языков.
+     - `GET /api/localization`: Receive localized texts and messages to support different languages.
 
 16. **SecurityService**:
 
-    - Этот сервис может предоставлять функции безопасности, такие как шифрование и защиту от атак, но не обязательно иметь отдельные ендпоинты.
-
-Помимо вышеперечисленных, в зависимости от конкретных требований вашего проекта, могут потребоваться дополнительные ендпоинты и сервисы.
+     - This service may provide security features such as encryption and attack protection, but does not necessarily have separate endpoints.
+   
+---
 
 # SERVICEs
 
-При разделении бэкенд-части проекта на три проекта (DAL, Domain, WebAPI), сервисы обычно размещаются в папке Services проекта Domain. Вот перечень типичных сервисов, которые могут быть размещены в папке Services:
+When dividing the backend part of the project into three projects (DAL, Domain, WebAPI), services are usually located in the Services folder of the Domain project. Here is a list of typical services that can be placed in the Services folder:
 
-1. **UserService**: Управление пользователями, включая аутентификацию, авторизацию, управление ролями и правами доступа.
+1. **UserService**: User management, including authentication, authorization, role management and access rights.
 
-2. **RequestService**: Управление заявками, включая создание, обновление, удаление и поиск заявок.
+2. **RequestService**: Manage requests, including creating, updating, deleting and searching requests.
 
-3. **DocumentService**: Управление документами, включая создание, обновление, удаление и поиск документов.
+3. **DocumentService**: Document management, including creating, updating, deleting and searching documents.
 
-4. **ContractService**: Управление договорами, включая создание, обновление, удаление и поиск договоров.
+4. **ContractService**: Contract management, including creating, updating, deleting and searching for contracts.
 
-5. **ClientService**: Управление компаниями-клиентами, включая создание, обновление, удаление и поиск компаний-клиентов.
+5. **ClientService**: Manage client companies, including creating, updating, deleting and searching client companies.
 
-6. **ContactService**: Управление контактными лицами компаний-клиентов, включая создание, обновление, удаление и поиск контактных лиц.
+6. **ContactService**: Manage contacts of client companies, including creating, updating, deleting and searching contacts.
 
-7. **AssignmentService**: Управление назначениями и ответственными лицами для заявок и документов.
+7. **AssignmentService**: Manage assignments and responsible persons for applications and documents.
 
-8. **AuditService**: Журналирование действий пользователей и аудит системных событий.
+8. **AuditService**: Logging of user actions and auditing of system events.
 
-9. **NotificationService**: Управление уведомлениями и оповещениями пользователей о событиях в системе.
+9. **NotificationService**: Manage notifications and alerts to users about events in the system.
 
-10. **ReportService**: Генерация и предоставление отчетов и статистики для пользователей.
+10. **ReportService**: Generate and provide reports and statistics to users.
 
-11. **AuthorizationService**: Сервис для управления авторизацией и генерации токенов для аутентификации API запросов.
+11. **AuthorizationService**: Service for managing authorization and generating tokens for authenticating API requests.
 
-12. **FileService**: Управление файлами и хранение документов.
+12. **FileService**: File management and document storage.
 
-13. **EmailService**: Отправка электронных писем и управление уведомлениями по электронной почте.
+13. **EmailService**: Send emails and manage email notifications.
 
-14. **SettingsService**: Управление настройками и конфигурацией системы.
+14. **SettingsService**: Manage system settings and configuration.
 
-15. **LocalizationService**: Локализация текстовых сообщений и интерфейса для поддержки разных языков.
+15. **LocalizationService**: Localization of text messages and interface to support different languages.
 
-16. **SecurityService**: Меры безопасности, такие как шифрование данных, защита от атак и обработка исключений.
+16. **SecurityService**: Security measures such as data encryption, attack protection and exception handling.
 
-Это лишь примеры сервисов, которые могут потребоваться в вашем проекте CRM для сюрвейерской компании. Фактический перечень сервисов может зависеть от конкретных требований вашего проекта и бизнес-потребностей.
+---
+
+# UI Design Technical Specifications
+
+#### Scenarios for such users:
+1) SuperAdmin
+2) Director
+3) Manager
+4) Accountant
+5) Senior Surveyor
+6) Middle Surveyor
+7) Junior Surveyor
+
+#### General user pages:
+1) Register page
+2) Login Page
+3) Register Confirm Page
+4) Success conformation page
+5) Forgot Password Page
+6) Password Recovery Page
+
+### View pages
+1) dashboards for each user (like main page)
+2) page with client list
+3) page with order list
+4) order page with documents and information
+
+#### Create pages
+1) Create client with contact person
+2) Create contract
+3) Create invoice
+4) Create order
+5) Create document
+6) Create ship
+**NOTE**: Depending on the design of the viewing pages, these windows may not be needed.  
 
 
+Please provide the page design on the resource:
+[Figma](https://www.figma.com)
 
 
-___
-### Project SSC:
-```dataview
-LIST
-FROM "Notes"
-WHERE contains(project, "SSC")
-SORT number ASC 
-```
