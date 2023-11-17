@@ -1,5 +1,10 @@
 
-SSС Ship Survey Company
+# SPECIFICATION (preliminary)
+
+## Project Name: SSС - Ship Survey Company
+
+
+---
 
 # ENTITIES
 
