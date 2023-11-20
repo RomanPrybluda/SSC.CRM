@@ -3,6 +3,10 @@
 
 ## Project Name: SSС - Ship Survey Company
 
+---
+
+# [UserStoryScheme](https://miro.com/app/board/uXjVNMkpgCI=/?share_link_id=729305800909)
+
 
 ---
 
