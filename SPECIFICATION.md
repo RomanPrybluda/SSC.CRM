@@ -51,7 +51,7 @@
 - As an accountant, I want to have access to all sections of the site to manage financial data.
 - As an accountant, I want to be able to create and edit client agreements to ensure financial data is up to date.
 
-3. Main surveyors:    
+3. Senior surveyors:    
 - As the Principal Surveyor, I want to be able to create new documents within the application to begin the survey process.
 - As the Chief Surveyor, I want to be able to assign responsible staff (junior surveyors) to perform specific tasks in the application.
   
